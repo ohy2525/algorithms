@@ -6,7 +6,6 @@ public class bj10926 {
         Scanner in = new Scanner(System.in);
 
         String lastString = "??!";
-
         String s = in.next();
         System.out.println(s + lastString);
     }
