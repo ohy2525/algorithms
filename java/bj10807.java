@@ -18,7 +18,7 @@ public class bj10807 {
 
         int v = Integer.parseInt(br.readLine());
         br.close();
-        
+
         int ans = 0;
         for (int i = 0; i < N; i++) {
             if (arr[i] == v) {
