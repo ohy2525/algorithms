@@ -15,7 +15,7 @@ public class MinimumRemoveToMakeValidParentheses {
                 stack.addLast(i);
             } else if (c == ')') {
                 if (stack.isEmpty()) {
-                    arr[i] = '_';
+       i             arr[i] = '_';
                 } else {
                     stack.pollLast();
                 }
