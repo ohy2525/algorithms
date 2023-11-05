@@ -13,7 +13,8 @@ public class MinimumNumberofDaystoMakemBouquets {
         int right = Arrays.stream(bloomDay).max().getAsInt();
 
         while (left < right) {
-            int mid = (left + right) / 2;
+            //int mid = (left + right) / 2; //Integer 에서 오버플로우 발생 가능성 있음
+            int mid = left + (right - left) / 2;
             if (getCount(bloomDay, k, mid) >= m) {
                 right = mid;
             } else {
