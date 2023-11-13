@@ -13,7 +13,7 @@ public class LongestConsequenceSequence {
 
                 int sum = left + right + 1;
                 result = Math.max(result, sum);
-                
+
                 map.put(num, sum);
                 map.put(num - left, sum);
                 map.put(num + right, sum);
