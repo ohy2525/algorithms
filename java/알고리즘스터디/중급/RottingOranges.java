@@ -1,6 +1,8 @@
 package 알고리즘스터디.중급;
 
-public class RottingOrangs {
+import java.util.*;
+
+public class RottingOranges {
     class Point {
         int x;
         int y;
