@@ -5,7 +5,39 @@ import java.util.*;
 //https://protegejj.gitbook.io/algorithm-practice/leetcode/graph/261-graph-valid-tree
 
 public class GraphValidTree {
+    int used = 0;
+    int cnt = 0;
+
     public boolean validTree(int n, int[][] edges) {
+        if (n <= 1) return true;
+        int[] parent = new int[n];
+        Arrays.fill(parent, -1);
+
+        for (int[] e : edges) {
+            int fp = findParent(parent, e[0]);
+            int tp = findParent(parent, e[1]);
+            if (fp == tp) return false;
+            parent[fp] = tp;
+            cnt--;
+        }
+
+        return used == n && cnt == 1;
+    }
+
+    private int findParent(int[] parent, int node) {
+        if (parent[node] == -1) {
+            parent[node] = node;
+            used++; cnt++;
+            return node;
+        }
+        if (parent[node] == node) return node;
+
+        int p = findParent(parent, parent[node]);
+        parent[node] = p;
+
+        return p;
+    }
+    /*public boolean validTree(int n, int[][] edges) {
         List<Set<Integer>> adjList = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
@@ -43,5 +75,5 @@ public class GraphValidTree {
             }
         }
         return true;
-    }
+    }*/
 }
