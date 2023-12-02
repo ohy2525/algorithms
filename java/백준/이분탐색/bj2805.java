@@ -17,11 +17,11 @@ public class bj2805 {
         }
         br.close();
 
+
         int left = 0;
         int right = Arrays.stream(lengths).max().getAsInt();
-        int answer = 0;
 
-        while (left < right) {
+        while (left <= right) {
             int mid = left + (right - left) / 2;
             long sum = 0;
             for (int length : lengths) {
@@ -31,13 +31,12 @@ public class bj2805 {
             }
 
             if (sum >= M) {
-                answer = mid;
                 left = mid + 1;
             } else {
-                right = mid;
+                right = mid - 1;
             }
         }
 
-        System.out.println(answer);
+        System.out.println(right);
     }
 }
