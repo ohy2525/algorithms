@@ -1,12 +1,14 @@
 package 알고리즘스터디.중급;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CombinationSum {
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(candidates);
         backtracking(candidates, 0, target, new ArrayList<>(), result);
         return result;
     }
