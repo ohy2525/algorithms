@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TextJustification {
     public List<String> fullJustify(String[] words, int maxWidth) {
-        List<String> ans = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         
         List<String> tmp = new ArrayList<>();
         int curSize = 0, wordSize = 0;
@@ -48,7 +48,7 @@ public class TextJustification {
             }
         }
 
-        while (sb.length < maxWidth) {
+        while (sb.length() < maxWidth) {
             sb.append(" ");
         }
 
