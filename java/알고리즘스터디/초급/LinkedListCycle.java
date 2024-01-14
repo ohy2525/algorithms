@@ -5,14 +5,20 @@ public class LinkedListCycle {
         int val;
         ListNode next;
 
+        ListNode(){
+        }
+
         ListNode(int x) {
             val = x;
             next = null;
         }
     }
     public boolean hasCycle(ListNode head) {
-        ListNode fast = head;
-        ListNode slow = head;
+        //처음부터 null인 경우 방지
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
 
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
