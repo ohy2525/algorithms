@@ -1,0 +1,16 @@
+package 프로그래머스.코딩테스트연습;
+
+public class 예상대진표 {
+    public int solution(int n, int a, int b) {
+        int cnt = 0;
+
+        while (true) {
+            a = (int) Math.ceil((double) a / 2);
+            b = (int) Math.ceil((double) b / 2);
+            cnt++;
+            if (a == b) break;
+        }
+
+        return cnt;
+    }
+}
