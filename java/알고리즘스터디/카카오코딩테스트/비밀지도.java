@@ -44,4 +44,25 @@ public class 비밀지도 {
         }
         return sb.toString();
     }
+
+    public String[] answer(int n, int[] arr1, int[] arr2) {
+        String[] answer = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            String s = Integer.toBinaryString(arr1[i] | arr2[i]);
+
+            StringBuilder sb = new StringBuilder();
+            for (int idx = s.length() - 1; idx >= 0; idx--) {
+                sb.append((s.charAt(idx) == '1') ? "#" : " ");
+            }
+
+            while (sb.length() < n) {
+                sb.append(" ");
+            }
+
+            answer[i] = sb.reverse().toString();
+        }
+
+        return answer;
+    }
 }
