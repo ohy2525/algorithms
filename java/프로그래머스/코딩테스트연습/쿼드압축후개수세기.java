@@ -3,7 +3,7 @@ package 프로그래머스.코딩테스트연습;
 public class 쿼드압축후개수세기 {
     static int[][] arr;
     static int[] answer = new int[2];
-    
+
     public int[] solution(int[][] arr) {
         this.arr = arr;
         int n = arr.length;
