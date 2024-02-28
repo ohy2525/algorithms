@@ -77,4 +77,47 @@ public class 괄호변환 {
         if (q.isEmpty()) return true;
         return false;
     }
+
+
+    // study
+    public String solution2(String p) {
+        if (p.length() == 0) return "";
+
+        int sum = 0, idx = 0;
+        for (idx = 0; idx < p.length(); idx++) {
+            sum += p.charAt(idx) == '(' ? 1 : -1;
+            if (sum == 0) {
+                break;
+            }
+        }
+
+        String u = p.substring(0, idx + 1);
+        String v = p.substring(idx + 1);
+        if (isValid2(u)) {
+            return u + solution(v);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('(').append(solution(v)).append(')');
+        for (int i = 1; i < u.length() - 1; i++) {
+            sb.append(u.charAt(i) == '(' ? ')' : '(');
+        }
+
+        return sb.toString();
+    }
+
+    private boolean isValid2(String s) {
+        int sum = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                sum++;
+            } else {
+                if (sum == 0) return false;
+                sum--;
+            }
+        }
+
+        return true;
+    }
+
 }
