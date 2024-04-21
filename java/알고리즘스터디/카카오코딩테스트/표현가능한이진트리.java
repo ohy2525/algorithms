@@ -4,76 +4,34 @@ import java.util.*;
 
 public class 표현가능한이진트리 {
     public int[] solution(long[] numbers) {
-        List<Integer> answer = new ArrayList<>();
+        int[] answer = new int[numbers.length];
 
-        for (long number : numbers) {
-            if (isBinaryTree(number)) {
-                answer.add(1);
-            } else {
-                answer.add(0);
+        for (int i = 0; i < numbers.length; i++) {
+            long n = numbers[i];
+            String s = Long.toBinaryString(n);
+            int len = s.length(), depth = 1, cnt = 1;
+
+            while (len > cnt) {
+                depth *= 2;
+                cnt += depth;
             }
+
+            s = "0".repeat(cnt - len) + s;
+
+            answer[i] = isValid(s.toCharArray(), s.length() / 2, 0, s.length() - 1, false) ? 1 : 0;
         }
 
-        return answer.stream().mapToInt(Integer::intValue).toArray();
+        return answer;
     }
 
-    private boolean isBinaryTree(long number) {
-        String binary = Long.toBinaryString(number);
-        String fullBinary = getFullBinary(binary);
-        int len = fullBinary.length();
+    private boolean isValid(char[] arr, int idx, int l, int r, boolean shouldBeZero) {
+        if (shouldBeZero && arr[idx] != '0') return false;
+        if (l == r) return true;
 
-        int root = len / 2;
-        String leftSubTree = fullBinary.substring(0, root);
-        String rightSubTree = fullBinary.substring(root + 1);
+        int leftMid = (l + idx - 1) / 2;
+        int rightMid = (idx + 1 + r) / 2;
+        boolean isZero = arr[idx] == '0';
 
-        if (fullBinary.charAt(root) == '0') {
-            return false;
-        }
-
-        return isBinaryTree(leftSubTree) && isBinaryTree(rightSubTree);
-    }
-
-    private String getFullBinary(String binary) {
-
-        int length = binary.length();
-        int nodeCount = 1;
-        int level = 1;
-        while (length > nodeCount) {
-            level *= 2;
-            nodeCount += level;
-        }
-
-        int offset = nodeCount - length;
-        return "0".repeat(offset) + binary;
-    }
-
-    private boolean isBinaryTree(String binary) {
-        int len = binary.length();
-        if (binary.length() == 0) return true;
-
-        int root = len / 2;
-        String leftSubTree = binary.substring(0, root);
-        String rightSubTree = binary.substring(root + 1);
-
-        if (binary.charAt(root) == '0') {
-            return isZeroTree(leftSubTree) && isZeroTree(rightSubTree);
-        }
-
-        return isBinaryTree(leftSubTree) && isBinaryTree(rightSubTree);
-    }
-
-    private boolean isZeroTree(String binary) {
-        int len = binary.length();
-        if (binary.length() == 0) return true;
-
-        int root = len / 2;
-        String leftSubTree = binary.substring(0, root);
-        String rightSubTree = binary.substring(root + 1);
-
-        if (binary.charAt(root) == '1') {
-            return false;
-        }
-
-        return isZeroTree(leftSubTree) && isZeroTree(rightSubTree);
+        return isValid(arr, leftMid, l, idx - 1, isZero) && isValid(arr, rightMid, idx + 1, r, isZero);
     }
 }
