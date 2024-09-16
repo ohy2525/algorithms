@@ -17,8 +17,7 @@ public class 가장긴팰린드롬 {
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
-        }
-        return right - left - 1;
+        }return right - left - 1;
     }
 
 }
