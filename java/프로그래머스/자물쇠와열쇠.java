@@ -1,0 +1,62 @@
+package 프로그래머스;
+
+public class 자물쇠와열쇠 {
+    int[][] place;
+
+    public boolean solution(int[][] key, int[][] lock) {
+        int N = lock.length + (2 * (key.length - 1));
+        place = new int[N][N];
+
+        for (int i = 0; i <= N - key.length; i++) {
+            for (int j = 0; j <= N - key.length; j++) {
+                for (int k = 0; k < 4; k++) {
+                    place = new int[N][N];
+                    initPlace(key.length - 1, lock);
+                    rotateKey(i, j, key, k);
+
+                    boolean check = checkPlace(key.length - 1, lock);
+                    if (check) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean checkPlace(int index, int[][] lock) {
+        for (int i = 0; i < lock.length; i++) {
+            for (int j = 0; j < lock[i].length; j++) {
+                if (place[index + i][index + j] != 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private void rotateKey(int x, int y, int[][] key, int k) {
+        for (int i = 0; i < key.length; i++) {
+            for (int j = 0; j < key[i].length; j++) {
+                if (k == 0) {
+                    place[x + i][y + j] += key[i][j];
+                } else if (k == 1) {
+                    place[x + i][y + j] += key[key.length - j - 1][i];
+                } else if (k == 2) {
+                    place[x + i][y + j] += key[key.length - i - 1][key.length - j - 1];
+                } else if (k == 3) {
+                    place[x + i][y + j] += key[j][key.length - i - 1];
+                }
+            }
+        }
+    }
+
+    private void initPlace(int index, int[][] lock) {
+        for (int i = 0; i < lock.length; i++) {
+            for (int j = 0; j < lock.length; j++) {
+                place[index + i][index + j] = lock[i][j];
+            }
+        }
+    }
+}
